@@ -7,7 +7,13 @@ typedef long long ll;
     cout.tie(NULL)
 ll f(ll mid, ll n)
 {
-    if (mid % 2 == 0)
+    // if x is even:
+
+    // x, x,
+    // 2x, 2x+1,
+    // 4x, 4x+1, 4x+3,
+    // lo... n.. hi
+    if (mid % 2 == 0) //
     {
         ll lo = mid;
         ll hi = mid + 1;

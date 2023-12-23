@@ -26,7 +26,7 @@ bool check(int x, int cur)
         if (!cur)
         {
             ans++;
-            cur ^= 1;
+            cur ^= 1; // switches  cur from 0 to 1 ans vice versa
         }
         else
         {

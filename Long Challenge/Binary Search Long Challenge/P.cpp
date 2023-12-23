@@ -4,7 +4,9 @@ using namespace std;
 
 bool check(int day, int n, int m, vector<int> &k, vector<pair<int, int>> &q)
 {
-    vector<int> lst(n, -1);
+    // 3 1
+    // 5 1
+    vector<int> lst(n, -1); // t1 --> d3, d5, lst[1]=5
     for (int i = 0; i < m; ++i)
     {
         if (q[i].first <= day)
@@ -12,14 +14,18 @@ bool check(int day, int n, int m, vector<int> &k, vector<pair<int, int>> &q)
             lst[q[i].second] = max(lst[q[i].second], q[i].first);
         }
     }
-    vector<vector<int>> off(1001);
+    // lst[1] = 5
+    // lst[2] = 5
+    vector<vector<int>> off(1001); // off[i] gives the list of transactions on which day i is the last offer day
     for (int i = 0; i < n; ++i)
     {
         if (lst[i] != -1)
         {
-            off[lst[i]].push_back(i);
+            off[lst[i]].push_back(i); // lst[5]=[1,2]
         }
     }
+    // k1=10, k4=10
+    //  2-->1 3-->4    50-->1
     vector<int> need = k;
     int cur_money = 0;
     for (int i = 0; i <= day; ++i)
@@ -27,7 +33,7 @@ bool check(int day, int n, int m, vector<int> &k, vector<pair<int, int>> &q)
         ++cur_money;
         if (i > 1000)
             continue;
-        for (auto it : off[i])
+        for (auto it : off[i]) // off[5] = [1,2,3]
         {
             if (cur_money >= need[it])
             {
@@ -38,7 +44,7 @@ bool check(int day, int n, int m, vector<int> &k, vector<pair<int, int>> &q)
             {
                 need[it] -= cur_money;
                 cur_money = 0;
-                break;
+                break; // cuz u have no money left to spend today
             }
         }
     }
